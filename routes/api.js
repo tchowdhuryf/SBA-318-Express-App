@@ -1,20 +1,17 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const fs = require('fs');
-const path = require('path');
+const questions = require("../data/questions");
 
-// Load questions
-const questionsPath = path.join(__dirname, '../data/questions.json');
-
-// Fetch questions by category
-router.get('/questions/:category', (req, res) => {
+router.get("/questions/:category", (req, res) => {
   const category = req.params.category;
-  const data = JSON.parse(fs.readFileSync(questionsPath));
-  if (data.categories[category]) {
-    const questions = data.categories[category];
-    res.json(questions[Math.floor(Math.random() * questions.length)]);
+
+  if (questions.categories[category]) {
+    const categoryQuestions = questions.categories[category];
+    const randomQuestion =
+      categoryQuestions[Math.floor(Math.random() * categoryQuestions.length)];
+    res.json(randomQuestion); // Return a random question from the category
   } else {
-    res.status(404).json({ error: 'Category not found' });
+    res.status(404).json({ error: "Category not found" });
   }
 });
 
