@@ -3,14 +3,22 @@ const router = express.Router();
 const fs = require("fs");
 const path = require("path");
 
+//error handling middleware
+router.use((err, req, res, next) => {
+  console.error(err.stack);
+  res
+    .status(500)
+    .json({ error: err.message || "An unexpected error occurred" });
+});
+
 // Path to the questions.json file
 const questionsFilePath = path.join(__dirname, "../data/questions.json");
 
 // Fetch all categories
-router.get("/categories", (req, res) => {
+router.get("/categories", (req, res, next) => {
   fs.readFile(questionsFilePath, "utf-8", (err, data) => {
     if (err) {
-      return res.status(500).json({ error: "Could not read questions file" });
+      return next(new Error("Could not read questions file"));
     }
 
     const questions = JSON.parse(data);
@@ -22,12 +30,12 @@ router.get("/categories", (req, res) => {
 });
 
 // Filter questions by category
-router.get("/questions/:category", (req, res) => {
+router.get("/questions/:category", (req, res, next) => {
   const category = req.params.category;
 
   fs.readFile(questionsFilePath, "utf-8", (err, data) => {
     if (err) {
-      return res.status(500).json({ error: "Could not read questions file" });
+      return next(new Error("Could not read questions file"));
     }
 
     const questions = JSON.parse(data);
@@ -42,13 +50,13 @@ router.get("/questions/:category", (req, res) => {
 });
 
 // Fetch a question by ID in a specific category
-router.get("/questions/:category/:id", (req, res) => {
+router.get("/questions/:category/:id", (req, res, next) => {
   const { category, id } = req.params;
 
   // Read the questions.json file
   fs.readFile(questionsFilePath, "utf-8", (err, data) => {
     if (err) {
-      return res.status(500).json({ error: "Error reading questions file" });
+      return next(new Error("Error reading questions file"));
     }
 
     const questions = JSON.parse(data);
@@ -73,7 +81,7 @@ router.get("/questions/:category/:id", (req, res) => {
 });
 
 // Add new question to a category
-router.post("/questions/:category", (req, res) => {
+router.post("/questions/:category", (req, res, next) => {
   const category = req.params.category;
   const { question, options, answer } = req.body;
 
@@ -92,7 +100,7 @@ router.post("/questions/:category", (req, res) => {
   // Read the questions.json file
   fs.readFile(questionsFilePath, "utf-8", (err, data) => {
     if (err) {
-      return res.status(500).json({ error: "Error reading questions file" });
+      return next(new Error("Error reading questions file"));
     }
 
     const questions = JSON.parse(data);
@@ -120,7 +128,7 @@ router.post("/questions/:category", (req, res) => {
       JSON.stringify(questions, null, 2),
       (err) => {
         if (err) {
-          return res.status(500).json({ error: "Error saving question" });
+          return next(new Error("Error saving question"));
         }
 
         res.status(200).json({
@@ -133,13 +141,13 @@ router.post("/questions/:category", (req, res) => {
 });
 
 // Partially update a question by ID in a specific category
-router.patch("/questions/:category/:id", (req, res) => {
+router.patch("/questions/:category/:id", (req, res, next) => {
   const { category, id } = req.params;
   const { question, options, answer } = req.body;
 
   fs.readFile(questionsFilePath, "utf-8", (err, data) => {
     if (err) {
-      return res.status(500).json({ error: "Error reading questions file" });
+      return next(new Error("Error reading questions file"));
     }
 
     const questions = JSON.parse(data);
@@ -173,7 +181,7 @@ router.patch("/questions/:category/:id", (req, res) => {
       JSON.stringify(questions, null, 2),
       (err) => {
         if (err) {
-          return res.status(500).json({ error: "Error saving updated file" });
+          return next(new Error("Error saving updated file"));
         }
 
         res.status(200).json({
@@ -186,7 +194,7 @@ router.patch("/questions/:category/:id", (req, res) => {
 });
 
 // Fully update a question by ID in a specific category
-router.put("/questions/:category/:id", (req, res) => {
+router.put("/questions/:category/:id", (req, res, next) => {
   const { category, id } = req.params;
   const { question, options, answer } = req.body;
 
@@ -204,7 +212,7 @@ router.put("/questions/:category/:id", (req, res) => {
 
   fs.readFile(questionsFilePath, "utf-8", (err, data) => {
     if (err) {
-      return res.status(500).json({ error: "Error reading questions file" });
+      return next(new Error("Error reading questions file"));
     }
 
     const questions = JSON.parse(data);
@@ -234,7 +242,7 @@ router.put("/questions/:category/:id", (req, res) => {
       JSON.stringify(questions, null, 2),
       (err) => {
         if (err) {
-          return res.status(500).json({ error: "Error saving updated file" });
+          return next(new Error("Error saving updated file"));
         }
 
         res.status(200).json({
@@ -247,13 +255,13 @@ router.put("/questions/:category/:id", (req, res) => {
 });
 
 // Delete a question by ID in a specific category
-router.delete("/questions/:category/:id", (req, res) => {
+router.delete("/questions/:category/:id", (req, res, next) => {
   const { category, id } = req.params;
 
   // Read the questions.json file
   fs.readFile(questionsFilePath, "utf-8", (err, data) => {
     if (err) {
-      return res.status(500).json({ error: "Error reading questions file" });
+      return next(new Error("Error reading questions file"));
     }
 
     const questions = JSON.parse(data);
@@ -282,7 +290,7 @@ router.delete("/questions/:category/:id", (req, res) => {
       JSON.stringify(questions, null, 2),
       (err) => {
         if (err) {
-          return res.status(500).json({ error: "Error saving updated file" });
+          return next(new Error("Error saving updated file"));
         }
 
         res.status(200).json({
