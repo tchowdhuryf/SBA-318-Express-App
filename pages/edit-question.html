@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Question</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2em;
+      }
+      form {
+        max-width: 400px;
+      }
+      label {
+        display: block;
+        margin-top: 1em;
+      }
+      input,
+      select,
+      button {
+        width: 100%;
+        padding: 0.5em;
+        margin-top: 0.5em;
+      }
+      #preview {
+        margin-top: 1em;
+        padding: 1em;
+        border: 1px solid #ddd;
+        background: #f9f9f9;
+      }
+      #statusMessage {
+        margin-top: 1em;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Edit a Question</h1>
+    <form id="editQuestionForm">
+      <label for="category">Category:</label>
+      <select id="category" name="category" required>
+        <!-- Categories will be dynamically populated -->
+      </select>
+
+      <label for="questionId">Question ID:</label>
+      <input
+        type="text"
+        id="questionId"
+        name="questionId"
+        placeholder="Enter the question ID"
+        required />
+
+      <button type="button" id="previewButton">Preview Question</button>
+      <div id="preview"></div>
+
+      <label for="question">Question:</label>
+      <input
+        type="text"
+        id="question"
+        name="question"
+        placeholder="Enter the updated question" />
+
+      <label for="option1">Option 1:</label>
+      <input
+        type="text"
+        id="option1"
+        name="option1"
+        placeholder="Enter option 1" />
+
+      <label for="option2">Option 2:</label>
+      <input
+        type="text"
+        id="option2"
+        name="option2"
+        placeholder="Enter option 2" />
+
+      <label for="option3">Option 3:</label>
+      <input
+        type="text"
+        id="option3"
+        name="option3"
+        placeholder="Enter option 3" />
+
+      <label for="option4">Option 4:</label>
+      <input
+        type="text"
+        id="option4"
+        name="option4"
+        placeholder="Enter option 4" />
+
+      <label for="answer">Correct Answer:</label>
+      <input
+        type="text"
+        id="answer"
+        name="answer"
+        placeholder="Enter the correct answer" />
+
+      <button type="button" id="patchButton">Edit Question</button>
+      <button type="button" id="putButton">Replace Question</button>
+    </form>
+
+    <p id="statusMessage"></p>
+    <script src="../js/edit-question.js"></script>
+  </body>
+</html>

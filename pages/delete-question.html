@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Question</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2em;
+      }
+      form {
+        max-width: 400px;
+      }
+      label {
+        display: block;
+        margin-top: 1em;
+      }
+      input,
+      select,
+      button {
+        width: 100%;
+        padding: 0.5em;
+        margin-top: 0.5em;
+      }
+      #preview {
+        margin-top: 1em;
+        padding: 1em;
+        border: 1px solid #ddd;
+        background: #f9f9f9;
+      }
+      #statusMessage {
+        margin-top: 1em;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Delete a Question</h1>
+    <form id="deleteQuestionForm">
+      <label for="category">Category:</label>
+      <select id="category" name="category" required>
+        <!-- Categories will be dynamically populated -->
+      </select>
+
+      <label for="questionId">Question ID:</label>
+      <input
+        type="text"
+        id="questionId"
+        name="questionId"
+        placeholder="Enter the question ID"
+        required />
+
+      <button type="button" id="previewButton">Preview Question</button>
+      <div id="preview"></div>
+
+      <button type="submit">Delete Question</button>
+    </form>
+
+    <p id="statusMessage"></p>
+    <script src="../js/delete-question.js"></script>
+  </body>
+</html>

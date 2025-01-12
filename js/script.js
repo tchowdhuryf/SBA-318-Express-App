@@ -1,8 +1,28 @@
+let currentQuestionIndex = 0;
+let questions = [];
+
 async function startGame(category) {
-  const response = await fetch(`api/questions/${category}`);
-  const question = await response.json();
-  console.log(response);
-  displayQuestion(question);
+  try {
+    const response = await fetch(`/api/questions/${category}`);
+    questions = await response.json();
+
+    if (!Array.isArray(questions) || questions.length === 0) {
+      console.error("No questions found for this category.");
+      return;
+    }
+
+    displayQuestion(questions[currentQuestionIndex]);
+  } catch (error) {
+    console.error("Error fetching questions:", error);
+  }
+}
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
 
 function displayQuestion(question) {
@@ -14,12 +34,15 @@ function displayQuestion(question) {
   const options = document.getElementById("options");
   options.innerHTML = "";
 
-  question.options.forEach((option) => {
+  const shuffleOptions = shuffle([...question.options]);
+
+  shuffleOptions.forEach((option) => {
     const list = document.createElement("li");
     list.innerText = option;
     list.onclick = () => checkAnswer(list, question.answer);
     options.appendChild(list);
   });
+  updateNavigationButton();
 }
 
 function checkAnswer(selectedElement, correct) {
@@ -36,4 +59,17 @@ function checkAnswer(selectedElement, correct) {
       option.style.color = "white";
     }
   });
+}
+
+//disable button on last question
+function updateNavigationButton() {
+  document.getElementById("next-btn").disabled =
+    currentQuestionIndex === questions.length - 1;
+}
+
+function nextQuestion() {
+  if (currentQuestionIndex < questions.length - 1) {
+    currentQuestionIndex++;
+    displayQuestion(questions[currentQuestionIndex]);
+  }
 }

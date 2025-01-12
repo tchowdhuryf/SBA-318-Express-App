@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Question</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2em;
+      }
+      form {
+        max-width: 400px;
+      }
+      label {
+        display: block;
+        margin-top: 1em;
+      }
+      input,
+      select,
+      button {
+        width: 100%;
+        padding: 0.5em;
+        margin-top: 0.5em;
+      }
+      #statusMessage {
+        margin-top: 1em;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Add a New Question</h1>
+    <form id="addQuestionForm">
+      <label for="category">Category:</label>
+      <select id="category" name="category" required>
+        <!-- Categories will be dynamically populated -->
+      </select>
+
+      <label for="question">Question:</label>
+      <input
+        type="text"
+        id="question"
+        name="question"
+        placeholder="Enter your question"
+        required />
+
+      <label for="option1">Option 1:</label>
+      <input
+        type="text"
+        id="option1"
+        name="option1"
+        placeholder="Enter option 1"
+        required />
+
+      <label for="option2">Option 2:</label>
+      <input
+        type="text"
+        id="option2"
+        name="option2"
+        placeholder="Enter option 2"
+        required />
+
+      <label for="option3">Option 3:</label>
+      <input
+        type="text"
+        id="option3"
+        name="option3"
+        placeholder="Enter option 3"
+        required />
+
+      <label for="option4">Option 4:</label>
+      <input
+        type="text"
+        id="option4"
+        name="option4"
+        placeholder="Enter option 4"
+        required />
+
+      <label for="answer">Correct Answer:</label>
+      <input
+        type="text"
+        id="answer"
+        name="answer"
+        placeholder="Enter the correct answer"
+        required />
+
+      <button type="submit">Add Question</button>
+    </form>
+
+    <p id="statusMessage"></p>
+    <script src="../js/add-question.js"></script>
+  </body>
+</html>
