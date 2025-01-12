@@ -8,16 +8,21 @@
   </head>
   <body>
     <nav>
-      <button onclick="location.href='pages/add-question.html'">
-        Add Question
-      </button>
-      <button onclick="location.href='pages/delete-question.html'">
-        Delete Question
-      </button>
-      <button onclick="location.href='pages/edit-question.html'">
-        Edit Question
-      </button>
-      <button onclick="location.href='pages/leaderboard.html'">
+      <div class="dropdown">
+        <button class="dropdown-btn">Manage Questions</button>
+        <div class="dropdown-content">
+          <button onclick="location.href='pages/add-question.html'">
+            Add Question
+          </button>
+          <button onclick="location.href='pages/delete-question.html'">
+            Delete Question
+          </button>
+          <button onclick="location.href='pages/edit-question.html'">
+            Edit Question
+          </button>
+        </div>
+      </div>
+      <button class="leaderboard-btn" onclick="location.href='pages/leaderboard.html'">
         Leaderboard
       </button>
     </nav>
