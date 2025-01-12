@@ -10,9 +10,25 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.static(__dirname));
 
+//logging middleware - custom
+const loggingMidddleware =((req, res, next) => {
+  const time = new Date();
+
+  console.log(
+    `-----
+${time.toLocaleTimeString()}: Received a ${req.method} request to ${req.url}.`
+  );
+  if (Object.keys(req.body).length > 0) {
+    console.log("Containing the data:");
+    console.log(`${JSON.stringify(req.body)}`);
+  }
+  next();
+});
+
 // API Routes
 app.use("/api", questionRoutes);
 app.use("/api", leaderboardRoutes);
+app.use(loggingMidddleware);
 
 // Homepage
 app.get("/", (req, res) => {
