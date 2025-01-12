@@ -11,6 +11,15 @@ fetch("/api/categories")
     });
   });
 
+  function resetFormInputs() {
+    document.getElementById("question").value = "";
+    document.getElementById("option1").value = "";
+    document.getElementById("option2").value = "";
+    document.getElementById("option3").value = "";
+    document.getElementById("option4").value = "";
+    document.getElementById("answer").value = "";
+  }
+
 // Handle question preview
 document.getElementById("previewButton").addEventListener("click", () => {
   const category = document.getElementById("category").value;
@@ -51,6 +60,7 @@ document.getElementById("previewButton").addEventListener("click", () => {
     .catch((err) => {
       previewElement.textContent =
         "An error occurred or the question was not found.";
+        resetFormInputs();
       console.error(err);
     });
 });
@@ -88,6 +98,7 @@ document.getElementById("patchButton").addEventListener("click", () => {
     .catch((err) => {
       document.getElementById("statusMessage").textContent =
         "An error occurred.";
+        resetFormInputs();
       console.error(err);
     });
 });
@@ -121,6 +132,7 @@ document.getElementById("putButton").addEventListener("click", () => {
     .catch((err) => {
       document.getElementById("statusMessage").textContent =
         "An error occurred.";
+        resetFormInputs;
       console.error(err);
     });
 });
