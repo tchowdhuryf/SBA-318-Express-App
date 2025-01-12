@@ -6,23 +6,28 @@ const path = require("path");
 // Path to the leaderboard.json file
 const leaderboardFilePath = path.join(__dirname, "../data/leaderboard.json");
 
-// Fetch all categories in the leaderboard
-router.get("/categories", (req, res) => {
-  fs.readFile(leaderboardFilePath, "utf-8", (err, data) => {
-    if (err) {
-      return res.status(500).json({ error: "Could not read leaderboard file" });
-    }
+// Middleware for validating leaderboard category
+function validateCategory(req, res, next) {
+    const category = req.params.category;
+  
+    fs.readFile(leaderboardFilePath, "utf-8", (err, data) => {
+      if (err) {
+        return res.status(500).json({ error: "Could not read leaderboard file" });
+      }
 
-    const leaderboard = JSON.parse(data);
-
-    // Extract category names
-    const categories = Object.keys(leaderboard.categories);
-    res.json(categories);
-  });
-});
+      const leaderboard = JSON.parse(data);
+  
+      if (!leaderboard.categories[category]) {
+        return res.status(404).json({ error: "Category not found" });
+      }
+  
+      req.categoryData = leaderboard.categories[category];
+      next();
+    });
+  }
 
 // Fetch all leaderboard entries in a category
-router.get("/leaderboard/:category", (req, res) => {
+router.get("/leaderboard/:category", validateCategory,(req, res) => {
   const category = req.params.category;
 
   // Read the leaderboard.json file

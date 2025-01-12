@@ -21,7 +21,7 @@ router.get("/categories", (req, res) => {
   });
 });
 
-// Fetch all questions in a category
+// Filter questions by category
 router.get("/questions/:category", (req, res) => {
   const category = req.params.category;
 
