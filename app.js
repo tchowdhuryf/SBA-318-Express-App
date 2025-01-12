@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const apiRoutes = require("./routes/api");
+const questionRoutes = require("./routes/questionRoutes");
 
 const app = express();
 const PORT = 3000;
@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.static(__dirname));
 
 // API Routes
-app.use("/api", apiRoutes);
+app.use("/api", questionRoutes);
 
 // Homepage
 app.get("/", (req, res) => {
