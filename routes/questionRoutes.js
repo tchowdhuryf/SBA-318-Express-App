@@ -294,5 +294,4 @@ router.delete("/questions/:category/:id", (req, res) => {
   });
 });
 
-// Export the router
 module.exports = router;

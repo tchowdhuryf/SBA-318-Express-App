@@ -8,12 +8,17 @@
   </head>
   <body>
     <nav>
-      <button onclick="location.href='pages/add-question.html'">Add Question</button>
+      <button onclick="location.href='pages/add-question.html'">
+        Add Question
+      </button>
       <button onclick="location.href='pages/delete-question.html'">
         Delete Question
       </button>
       <button onclick="location.href='pages/edit-question.html'">
         Edit Question
+      </button>
+      <button onclick="location.href='pages/leaderboard.html'">
+        Leaderboard
       </button>
     </nav>
     <div id="app">
@@ -44,6 +49,19 @@
         <button id="next-btn" onclick="nextQuestion()">Next</button>
         <p id="timer">Time left: 15s</p>
       </div>
+    </div>
+    <div id="end-container" style="display: none">
+      <h2 id="final-score"></h2>
+      <form id="save-score-form">
+        <label for="username">Enter Your Name:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Your Name"
+          required />
+        <button type="submit">Save Score</button>
+      </form>
     </div>
     <script src="./js/script.js"></script>
   </body>

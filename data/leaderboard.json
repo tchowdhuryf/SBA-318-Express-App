@@ -1,0 +1,11 @@
+{
+  "categories": {
+    "sports": [
+      {
+        "id": 1,
+        "username": "Tas",
+        "score": 5
+      }
+    ]
+  }
+}

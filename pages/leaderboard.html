@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leaderboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2em;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2em;
+        display: none; /* Hidden by default */
+      }
+      th,
+      td {
+        padding: 1em;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+      caption {
+        font-size: 1.5em;
+        margin-bottom: 1em;
+      }
+      .error {
+        color: red;
+        font-weight: bold;
+        margin-top: 1em;
+      }
+      #controls {
+        display: none;
+        margin-bottom: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Leaderboard</h1>
+    <div id="controls">
+      <select id="categorySelector">
+        <!-- Categories will be dynamically populated -->
+      </select>
+      <div id="errorMessage" class="error" style="display: none"></div>
+    </div>
+    <table id="leaderboardTable">
+      <caption>
+        Top 10 Players
+      </caption>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Username</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Leaderboard entries will be dynamically populated -->
+      </tbody>
+    </table>
+    <script src="../js/leaderboard.js"></script>
+  </body>
+</html>

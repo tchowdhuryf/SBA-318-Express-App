@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const questionRoutes = require("./routes/questionRoutes");
+const leaderboardRoutes = require("./routes/leaderboardRoutes");
 
 const app = express();
 const PORT = 3000;
@@ -11,6 +12,7 @@ app.use(express.static(__dirname));
 
 // API Routes
 app.use("/api", questionRoutes);
+app.use("/api", leaderboardRoutes);
 
 // Homepage
 app.get("/", (req, res) => {
