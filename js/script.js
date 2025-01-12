@@ -56,13 +56,13 @@ function checkAnswer(selectedElement, correct) {
     option.style.pointerEvents = "none"; //cannot click options after one is selected
 
     if (option.innerText === correct) {
-      option.style.backgroundColor = "#03C03C";
+      option.style.backgroundColor = "#7ddf64";
       option.style.color = "white";
       if (option === selectedElement) {
         score++;
       }
     } else if (option === selectedElement) {
-      option.style.backgroundColor = "#ED1B24";
+      option.style.backgroundColor = "#ed4d6e";
       option.style.color = "white";
     }
   });
