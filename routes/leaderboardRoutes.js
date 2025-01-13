@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs");
 const path = require("path");
-const error = require("../utilities/error")
 
 // Path to the leaderboard.json file
 const leaderboardFilePath = path.join(__dirname, "../data/leaderboard.json");
